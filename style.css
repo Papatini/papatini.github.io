@@ -59,6 +59,7 @@ main {
 
 .sidebar-img {
     width: 200px;
+    border: 5px solid #1500d3
 }
 
 .content {

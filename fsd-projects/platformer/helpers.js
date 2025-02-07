@@ -704,7 +704,7 @@ function keyboardControlActions() {
     }
   }
 }
-
+let sprint = false;
 function handleKeyDown(e) {
   keyPress.any = true;
   if (e.key === "ArrowUp" || e.key === "w") {

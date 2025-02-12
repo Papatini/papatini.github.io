@@ -44,9 +44,9 @@ $(function () {
 
 
     // TODO 3 - Create Collectables
-    createCollectable("max", 1030, 650, 0, 0);
-    createCollectable("database", 1130, 600, 1, 1);
-    createCollectable("diamond", 130, 130, 0, 0);
+    createCollectable("bass", 1030, 650, 0, 0);
+    createCollectable("alto", 1130, 600, 1, 1);
+    createCollectable("treble_and_staff", 130, 130, 0, 0);
 
 
     

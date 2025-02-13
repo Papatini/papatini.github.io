@@ -9,6 +9,7 @@
 		.box {
 			width: 70px;
 			height: 70px;
+			background-image: linear-gradient(teal green);
 			background-color: teal;
 			font-size: 300%;
 			text-align: center;
@@ -22,6 +23,9 @@
 
 		.board {
 			height: 100vh;
+		}
+		body {
+			background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReqakav65EdImibHcu2639bCmgqqrKeZA1WdZG5QB1FYP69sI:https://plus.unsplash.com/premium_photo-1706838707088-e3b4170054e6%3Ffm%3Djpg%26q%3D60%26w%3D3000%26ixlib%3Drb-4.0.3%26ixid%3DM3wxMjA3fDB8MHxzZWFyY2h8MTN8fG1hcmJsZSUyMHRleHR1cmV8ZW58MHx8MHx8fDA%253D&s);
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -52,8 +56,9 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
+			function moveBoxTo(newPositionX, newPositionY) {
 				box.css("left", newPositionX);
+				box.css("top", newPositionY);
 			}
 
 			// changes the text displayed on the Box
@@ -66,8 +71,11 @@
 			//////////////////////////////////////////////////////////////////
 
 			// TODO 2 - Variable declarations 
-				var positionX = 0;
-
+				var positionX = 10;
+				var points = 0;
+				var speed = 10;
+				var positionY;
+				var speedY;
 
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -75,9 +83,15 @@
 			turn it around! 
 			*/
 			function update() {
-				moveBoxTo(300);
-				moveBoxTo(positionX);
-				positionX = positionX + 10;
+				
+				moveBoxTo(positionX, positionY);
+				positionX = positionX + speed;
+				if (positionX > boardWidth) {
+					speed *= -1;
+				}
+				if (positionX < 0) {
+					speed *= -1;
+				}
 
 			};
 
@@ -88,7 +102,9 @@
 			*/
 			function handleBoxClick() {
 				positionX = 0;
-				changeBoxText(0);
+				points++;
+				changeBoxText(points);
+				speed = 3 * points + 10;
 
 			};
 

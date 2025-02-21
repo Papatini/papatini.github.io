@@ -115,6 +115,16 @@
 			it should increase the points total, increase the speed, and move the box to
 			the left side of the screen.
 			*/
+
+			function getRandomColor() {
+				var red255 = Math.floor(Math.random() * 255);
+				var blue255 = Math.floor(Math.random() * 255);
+				var green255 = Math.floor(Math.random() * 255);
+				var colorStr = "rgb(" + red255 + ", " + blue255 + ", " + green255 + ")";
+				box.css("background-color", colorStr);
+			}
+
+
 			function handleBoxClick() {
 				positionX = randNum;
 				positionY = 0;
@@ -122,9 +132,11 @@
 				changeBoxText(points);
 				speed = 3 * points + 10;
 				speedY = 3 * points + 10;
-				
+				if (points % 3 === 0) {
+				getRandomColor();
+				}
 			}
-
+			
 
 
 

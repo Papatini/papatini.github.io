@@ -135,6 +135,10 @@
 				if (points % 3 === 0) {
 				getRandomColor();
 				}
+				if (points % 3 === 0) {
+					speed += 0.5;
+					speedY += 0.5;
+				}
 			}
 			
 
@@ -142,6 +146,10 @@
 
 
 		})();
+		var interval = setInterval(update, 5);
+		function endGame() {
+			clearInterval(interal);
+		}
 	</script>
 </body>
 

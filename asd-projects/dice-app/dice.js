@@ -1,12 +1,27 @@
 $(document).ready(function () {
   // Your code goes here
 
-});
-$("<div>")
+  function makeDot(top, left, elementID) {
+    $("<div>")
   .css("height", 15)
   .css("width", 15)
   .css("background-color", "black")
   .css("position", "absolute")
-  .css("top", 50)
-  .css("left", 50)
-  .appendTo("#die");
+  .css("top", top)
+  .css("left", left)
+  .appendTo(elementID);
+  }
+  function rollDie(dieId) {
+    var randomNum = Math.ceil(Math.random() * 6);
+    
+    console.log(randomNum);
+    
+  }
+  function handleClick() {
+    rollDie("#die")
+  }
+  $("#die").on("click", handleClick);
+  makeDot(50, 50, "#die"); // middle middle
+makeDot(25, 25, "#die"); // top left
+makeDot(75, 75, "#die"); // bottom right
+});

@@ -29,7 +29,7 @@ var KEY = {
   RIGHT: 39,
   DOWN: 40,
 };
-
+var isReversed = false;
 // interval variable required for stopping the update function when the game ends
 var updateInterval;
 
@@ -206,6 +206,10 @@ function handleAppleCollision() {
   var column = snake.tail.column;
   
   makeSnakeSquare(row, column);
+  snake.tail.element.css("backgroundColor", colors[colorIndex]);
+  if (score % 10 === 0) {
+    isReversed = !isReversed
+  }
 }
 
 function hasCollidedWithSnake() {

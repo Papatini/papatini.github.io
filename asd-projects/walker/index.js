@@ -16,6 +16,10 @@ function runProgram(){
   UP: 38,
   RIGHT: 39,
   DOWN: 40,
+  W: 87,
+  A: 65,
+  S: 83,
+  D: 68,
 };
   var walker = {
     x: 0,
@@ -23,6 +27,16 @@ function runProgram(){
     speedX: 0,
     speedY: 0,
   }
+  var wasdker = {
+    x: 390,
+    y: 390,
+    speedX: 0,
+    speedY: 0,
+  }
+
+  var randomColor = "#000000".replace(/0/g, function () {
+  return (~~(Math.random() * 16)).toString(16);
+});
   // Game Item Objects
 
 
@@ -37,6 +51,8 @@ function runProgram(){
   */
   $(document).on('keydown', handleKeyDown);                          
   $(document).on('keyup', handleKeyUp); 
+  on('click', handleClick); 
+  
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +82,14 @@ function runProgram(){
       walker.speedX = 5;
     } if (event.which === KEY.DOWN) {
       walker.speedY = 5;
+    } if (event.which === KEY.A) {
+      wasdker.speedX = -5;
+    } if (event.which === KEY.W) {
+      wasdker.speedY = -5;
+    } if (event.which === KEY.D) {
+      wasdker.speedX = 5;
+    } if (event.which === KEY.S) {
+      wasdker.speedY = 5;
     }
   }
   function handleKeyUp(event) {
@@ -77,7 +101,27 @@ function runProgram(){
       walker.speedX = 0;
     } if (event.which === KEY.DOWN) {
       walker.speedY = 0;
+    } if (event.which === KEY.A) {
+      wasdker.speedX = 0;
+    } if (event.which === KEY.W) {
+      wasdker.speedY = 0;
+    } if (event.which === KEY.D) {
+      wasdker.speedX = 0;
+    } if (event.which === KEY.S) {
+      wasdker.speedY = 0;
     }
+  }
+  function handleClick() {
+    $("#walker").css("background-color", randomColor)
+    $("#wasdker").css("background-color", randomColor)
+  }
+
+  function handleDiagonals() {
+    if (wasdker.speedX !== 0 && wasdker.speedY !== 0) {
+      wasdker.speedX = wasdker.speedX / Math.sqrt(2)
+      wasdker.speedY = wasdker.speedY / Math.sqrt(2)
+    }
+
   }
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -87,10 +131,14 @@ function runProgram(){
   function repositionGameItem() {
     walker.x = walker.x + walker.speedX
     walker.y = walker.y + walker.speedY
+    wasdker.x = wasdker.x + wasdker.speedX
+    wasdker.y = wasdker.y + wasdker.speedY
   }
   function redrawGameItem() {
     $("#walker").css("left", walker.x);
     $("#walker").css("top", walker.y);
+    $("#wasdker").css("left", wasdker.x);
+    $("#wasdker").css("top", wasdker.y);
   }
   function wallCollision() {
     if (walker.x < 0) {
@@ -101,8 +149,17 @@ function runProgram(){
       walker.y -= walker.speedY
     } if (walker.y + 50 > $("#board").height()) {
       walker.y -= walker.speedY
+    } if (wasdker.x < 0) {
+      wasdker.x -= wasdker.speedX
+    } if (wasdker.x + 50 > $("#board").width()) {
+      wasdker.x -= wasdker.speedX
+    } if (wasdker.y < 0) {
+      wasdker.y -= wasdker.speedY
+    } if (wasdker.y + 50 > $("#board").height()) {
+      wasdker.y -= wasdker.speedY
     }
   }
+  handleDiagonals()
   function endGame() {
     // stop the interval timer
     clearInterval(interval);

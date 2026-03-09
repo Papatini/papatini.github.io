@@ -22,6 +22,12 @@ body {
 #walker {
   width: 50px;
   height: 50px;
-  background-color: green;
+  background-color: red;
+  position: absolute;
+}
+#wasdker {
+  width: 50px;
+  height: 50px;
+  background-color: blue;
   position: absolute;
 }

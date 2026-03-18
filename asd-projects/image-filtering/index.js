@@ -20,10 +20,7 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-applyFilter(reddify);
-applyFilterNoBackground(decreaseBlue);
-applyFilter(increaseGreenByBlue);
-applyFilterNoBackground(reddify);
+applyFilterNoBackground(invert)
   
 
   // do not change the below line of code
@@ -90,5 +87,33 @@ function increaseGreenByBlue(pixelArray) {
   pixelArray[GREEN] = pixelArray[GREEN] + pixelArray[BLUE]
   pixelArray[GREEN] = keepInBounds(pixelArray[GREEN])
 }
-
+function grayScale(pixelArray) {
+  pixelArray[RED] = pixelArray[BLUE]
+  pixelArray[BLUE] = pixelArray[RED]
+  pixelArray[GREEN] = pixelArray[BLUE]
+  pixelArray[BLUE] = pixelArray[GREEN]
+  pixelArray[RED] = pixelArray[GREEN]
+  pixelArray[GREEN] = pixelArray[RED]
+}
+function purpleify(pixelArray) {
+   pixelArray[BLUE] = 200
+   pixelArray[RED] = 200
+}
+function vintage(pixelArray) {
+  var average = (pixelArray[RED] + pixelArray[BLUE] + pixelArray[GREEN])/3
+  decreaseAmount = average/10
+  pixelArray[RED] = pixelArray[RED] - decreaseAmount
+  pixelArray[BLUE] = pixelArray[BLUE] - decreaseAmount
+  pixelArray[GREEN] = pixelArray[GREEN] - decreaseAmount
+  pixelArray[RED] = keepInBounds(pixelArray[RED])
+  pixelArray[BLUE] = keepInBounds(pixelArray[BLUE])
+  pixelArray[GREEN] = keepInBounds(pixelArray[GREEN])
+  pixelArray[RED] = pixelArray[RED] + 25
+  pixelArray[RED] = keepInBounds(pixelArray[RED])
+}
+function invert(pixelArray) {
+  pixelArray[RED] = 255 - pixelArray[RED];
+  pixelArray[BLUE] = 255 - pixelArray[BLUE];
+  pixelArray[GREEN] = 255 - pixelArray[GREEN];
+}
 // CHALLENGE code goes below here

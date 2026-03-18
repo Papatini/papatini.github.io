@@ -20,7 +20,10 @@ function resetAndRender() {
 // all of your apply functions
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
-
+applyFilter(reddify);
+applyFilterNoBackground(decreaseBlue);
+applyFilter(increaseGreenByBlue);
+applyFilterNoBackground(reddify);
   
 
   // do not change the below line of code
@@ -32,18 +35,60 @@ function applyAndRender() {
 /////////////////////////////////////////////////////////
 
 // TODO 1, 2, 3 & 5: Create the applyFilter function here
-
+function applyFilter(filterFunction) {
+ for (var i = 0; i < image.length; i++) {
+   for (var j = 0; j < image[i].length; j++) {
+    var pixel = image[i][j]
+    var pixelArray = rgbStringToArray(pixel)
+    // This is where I’ll modify the color values later
+    filterFunction(pixelArray);
+    var updatedPixel = rgbArrayToString(pixelArray)
+    image[i][j] = updatedPixel
+   }
+   
+ }
+}
 
 // TODO 9 Create the applyFilterNoBackground function
-
+function applyFilterNoBackground(filterFunction) {
+  var backgroundColor = image[0][0];
+  for (var i = 0; i < image.length; i++) {
+   for (var j = 0; j < image[i].length; j++) {
+    if (image[i][j] !== backgroundColor) {
+      var pixelArray = rgbStringToArray(image[i][j])
+      filterFunction(pixelArray)
+      var updatedPixel = rgbArrayToString(pixelArray)
+      image[i][j] = updatedPixel
+    }
+   }
+  }
+}
 
 // TODO 6: Create the keepInBounds function
+function keepInBounds(num) {
+ if (num < 0) {
+  return 0
+ } else if (num > 255) {
+  return 255
+ } else {
+  return num
+ }
 
+}
 
 // TODO 4: Create reddify filter function
-
+function reddify(pixelArray) {
+  pixelArray[RED] = 200
+}
 
 // TODO 7 & 8: Create more filter functions
-
+function decreaseBlue(pixelArray) {
+ pixelArray[BLUE] = pixelArray[BLUE] - 50
+ pixelArray[BLUE] = keepInBounds(pixelArray[BLUE])
+}
+function increaseGreenByBlue(pixelArray) {
+  pixelArray[GREEN] = pixelArray[GREEN] + pixelArray[BLUE]
+  pixelArray[GREEN] = keepInBounds(pixelArray[GREEN])
+}
 
 // CHALLENGE code goes below here

@@ -19,10 +19,36 @@ button {
   margin-left: 12px;
 }
 
-#apply {
-  background: green;
+#invert {
+  background: rgb(255, 127, 255);
+  border-color: white;
+  color: white;
 }
-
-#reset {
+#vintage {
+  background: rgb(10, 95, 0);
+  color: white;
+  border-color: rgb(10, 10, 0);
+}
+#reddify {
   background: red;
+}
+#purpleify {
+  background: purple;
+  color: white;
+}
+#grayscale {
+  background: rgb(128, 128, 128);
+}
+#decreaseblue {
+  background: rgb(0, 0, 128);
+  color: white;
+}
+#igbb {
+  background: rgb(0, 128, 128);
+  color: white;
+}
+#reset {
+  background: rgb(0, 0, 0);
+  color: white;
+  border-color: gray;
 }

@@ -2,14 +2,19 @@
 // as soon as the page loads.
 $(document).ready(function () {
   render($("#display"), image);
-  $("#apply").on("click", applyAndRender);
+  $("#invert").on("click", applyAndRenderInvert);
+  $("#vintage").on("click", applyAndRenderVintage);
+  $("#reddify").on("click", applyAndRenderReddify);
+  $("#purpleify").on("click", applyAndRenderPurpleify);
+  $("#grayscale").on("click", applyAndRenderGrayScale);
+  $("#decreaseblue").on("click", applyAndRenderDecreaseBlue);
+  $("#igbb").on("click", applyAndRenderIGBB);
   $("#reset").on("click", resetAndRender);
 });
 
 /////////////////////////////////////////////////////////
 //////// event handler functions are below here /////////
 /////////////////////////////////////////////////////////
-
 // this function resets the image to its original value; do not change this function
 function resetAndRender() {
   reset();
@@ -18,15 +23,64 @@ function resetAndRender() {
 
 // this function applies the filters to the image and is where you should call
 // all of your apply functions
-function applyAndRender() {
-  // Multiple TODOs: Call your apply function(s) here
-applyFilterNoBackground(invert)
-  
-
-  // do not change the below line of code
+function applyAndRenderInvert() {
+var isConfirmed = confirm("Filter will not be applied to the background, is this okay?")
+if (isConfirmed) {
+  applyFilterNoBackground(invert)
+} else {
+  applyFilter(invert)
+}
   render($("#display"), image);
 }
-
+function applyAndRenderVintage() {
+var isConfirmed = confirm("Filter will not be applied to the background, is this okay?")
+if (isConfirmed) {
+  applyFilterNoBackground(vintage)
+} else {
+  applyFilter(vintage)
+}
+  render($("#display"), image);
+}
+function applyAndRenderReddify() {
+var isConfirmed = confirm("Filter will not be applied to the background, is this okay?")
+if (isConfirmed) {
+  applyFilterNoBackground(reddify)
+} else {
+  applyFilter(reddify)
+}
+  render($("#display"), image);
+}
+function applyAndRenderPurpleify() {
+var isConfirmed = confirm("Filter will not be applied to the background, is this okay?")
+if (isConfirmed) {
+  applyFilterNoBackground(purpleify)
+} else {
+  applyFilter(purpleify)
+}
+  render($("#display"), image);
+}
+function applyAndRenderGrayScale() {
+  applyFilter(grayScale)
+  render($("#display"), image);
+}
+function applyAndRenderDecreaseBlue() {
+var isConfirmed = confirm("Filter will not be applied to the background, is this okay?")
+if (isConfirmed) {
+  applyFilterNoBackground(decreaseBlue)
+} else {
+  applyFilter(decreaseBlue)
+}
+  render($("#display"), image);
+}
+function applyAndRenderIGBB() {
+var isConfirmed = confirm("Filter will not be applied to the background, is this okay?")
+if (isConfirmed) {
+  applyFilterNoBackground(increaseGreenByBlue)
+} else {
+  applyFilter(increaseGreenByBlue)
+}
+  render($("#display"), image);
+}
 /////////////////////////////////////////////////////////
 // "apply" and "filter" functions should go below here //
 /////////////////////////////////////////////////////////
@@ -42,7 +96,6 @@ function applyFilter(filterFunction) {
     var updatedPixel = rgbArrayToString(pixelArray)
     image[i][j] = updatedPixel
    }
-   
  }
 }
 
@@ -108,8 +161,10 @@ function vintage(pixelArray) {
   pixelArray[RED] = keepInBounds(pixelArray[RED])
   pixelArray[BLUE] = keepInBounds(pixelArray[BLUE])
   pixelArray[GREEN] = keepInBounds(pixelArray[GREEN])
-  pixelArray[RED] = pixelArray[RED] + 25
+  pixelArray[RED] = pixelArray[RED] + 10
   pixelArray[RED] = keepInBounds(pixelArray[RED])
+  pixelArray[GREEN] = pixelArray[GREEN] + 10
+  pixelArray[GREEN] = keepInBounds(pixelArray[GREEN])
 }
 function invert(pixelArray) {
   pixelArray[RED] = 255 - pixelArray[RED];

@@ -9,6 +9,7 @@ $(document).ready(function () {
   $("#grayscale").on("click", applyAndRenderGrayScale);
   $("#decreaseblue").on("click", applyAndRenderDecreaseBlue);
   $("#igbb").on("click", applyAndRenderIGBB);
+  $("#sml").on("click", applyAndRenderSmudgeLeft);
   $("#reset").on("click", resetAndRender);
 });
 
@@ -81,6 +82,10 @@ if (isConfirmed) {
 }
   render($("#display"), image);
 }
+function applyAndRenderSmudgeLeft() {
+  applySmudgeLeft(smudge)
+  render($("#display"), image);
+}
 /////////////////////////////////////////////////////////
 // "apply" and "filter" functions should go below here //
 /////////////////////////////////////////////////////////
@@ -114,6 +119,19 @@ function applyFilterNoBackground(filterFunction) {
   }
 }
 
+function applySmudgeLeft(filterFunction) {
+  for (var i = 0; i < image.length; i++) {
+   for (var j = 0; j < image[i].length - 1; j++) {
+    var currentPixel = image[i][j]
+    var pixelToRight = image[i][j+1]
+    var pixelArray = rgbStringToArray(currentPixel)
+    var pixelArrayToRight = rgbStringToArray(pixelToRight)
+    filterFunction(pixelArray, pixelArrayToRight)
+    var updatedPixel = rgbArrayToString(pixelArray)
+    image[i][j] = updatedPixel
+   }
+  }
+}
 // TODO 6: Create the keepInBounds function
 function keepInBounds(num) {
  if (num < 0) {
@@ -170,5 +188,16 @@ function invert(pixelArray) {
   pixelArray[RED] = 255 - pixelArray[RED];
   pixelArray[BLUE] = 255 - pixelArray[BLUE];
   pixelArray[GREEN] = 255 - pixelArray[GREEN];
+}
+function smudge(pixelArray, pixelArrayToSide) {
+  var averageRed = (pixelArray[RED] + pixelArrayToSide[RED])/2
+  var redAmount = averageRed*0.9
+  pixelArray[RED] = redAmount
+  var averageGreen = (pixelArray[GREEN] + pixelArrayToSide[GREEN])/2
+  var greenAmount = averageGreen*0.9
+  pixelArray[GREEN] = greenAmount
+  var averageBlue = (pixelArray[BLUE] + pixelArrayToSide[BLUE])/2
+  var blueAmount = averageBlue*0.9
+  pixelArray[RED] = blueAmount
 }
 // CHALLENGE code goes below here

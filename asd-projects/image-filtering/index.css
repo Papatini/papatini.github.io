@@ -47,6 +47,9 @@ button {
   background: rgb(0, 128, 128);
   color: white;
 }
+#sml {
+  background: green;
+}
 #reset {
   background: rgb(0, 0, 0);
   color: white;

@@ -191,13 +191,13 @@ function invert(pixelArray) {
 }
 function smudge(pixelArray, pixelArrayToSide) {
   var averageRed = (pixelArray[RED] + pixelArrayToSide[RED])/2
-  var redAmount = averageRed*0.9
-  pixelArray[RED] = redAmount
+  //var redAmount = averageRed*0.9
+  pixelArray[RED] = averageRed
   var averageGreen = (pixelArray[GREEN] + pixelArrayToSide[GREEN])/2
   var greenAmount = averageGreen*0.9
-  pixelArray[GREEN] = greenAmount
+  pixelArray[GREEN] = averageGreen
   var averageBlue = (pixelArray[BLUE] + pixelArrayToSide[BLUE])/2
   var blueAmount = averageBlue*0.9
-  pixelArray[RED] = blueAmount
+  pixelArray[BLUE] = averageBlue
 }
 // CHALLENGE code goes below here
